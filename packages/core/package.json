@@ -11,9 +11,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "papaparse": "^5.7.0"
+    "papaparse": "^5.7.0",
+    "read-excel-file": "^5.8.8"
   },
   "devDependencies": {
-    "@types/papaparse": "^5.5.2"
+    "@types/papaparse": "^5.5.2",
+    "exceljs": "^4.4.0"
   }
 }
