@@ -1,0 +1,9 @@
+{
+  "name": "@bi-os/fixtures",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@bi-os/core": "workspace:*" },
+  "scripts": { "typecheck": "tsc -p tsconfig.json", "test": "vitest run" }
+}

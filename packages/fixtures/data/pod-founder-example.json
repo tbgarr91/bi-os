@@ -1,0 +1,24 @@
+{
+  "id": "POD-FOUNDER-EXAMPLE",
+  "synthetic": true,
+  "status": "CANDIDATE_UNAPPROVED",
+  "source": "BI OS Project file 21 (Scenario fixture: founder example). Hypothetical, NOT real order performance.",
+  "currency": "USD",
+  "components": {
+    "product_price": "46.00",
+    "customer_shipping_charged": "4.99",
+    "discount": "0.00",
+    "supplier_production": "20.45",
+    "supplier_shipping": "5.50",
+    "processor_fee": "1.63",
+    "extra_variable_costs": "0.75"
+  },
+  "expected": {
+    "eligible_order_revenue": "50.99",
+    "variable_costs": "28.33",
+    "order_contribution": "22.66",
+    "contribution_margin_bps": 4444,
+    "supplier_listed_spread_estimate": "25.55",
+    "note": "Listed spread = 46.00 - 20.45. It is an estimate and must never be labelled actual profit."
+  }
+}

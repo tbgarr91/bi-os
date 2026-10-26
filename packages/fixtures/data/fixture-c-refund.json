@@ -1,0 +1,12 @@
+{
+  "id": "FIXTURE-C",
+  "synthetic": true,
+  "status": "CANDIDATE_UNAPPROVED",
+  "source": "BI OS Project file 16, Fixture C",
+  "currency": "USD",
+  "components": { "order": "100.00", "refund": "25.00" },
+  "expected": {
+    "net_sales_when_refund_in_period": "75.00",
+    "note": "Refund effective-date convention must be declared; payment and refund stay independently traceable."
+  }
+}

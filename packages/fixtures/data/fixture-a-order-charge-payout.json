@@ -1,0 +1,16 @@
+{
+  "id": "FIXTURE-A",
+  "synthetic": true,
+  "status": "CANDIDATE_UNAPPROVED",
+  "source": "BI OS Project file 16, Fixture A",
+  "currency": "USD",
+  "components": { "order": "100.00", "payment": "100.00", "fee": "3.00", "payout": "97.00" },
+  "expected": {
+    "eligible_gross_order_sales": "100.00",
+    "payment_received": "100.00",
+    "fee": "3.00",
+    "payout": "97.00",
+    "must_not_equal": ["297.00", "197.00"],
+    "note": "Order, payment and payout are one economic flow, never summed as separate sales."
+  }
+}

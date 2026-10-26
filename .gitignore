@@ -1,0 +1,20 @@
+node_modules/
+.next/
+.open-next/
+.wrangler/
+.vercel/
+dist/
+coverage/
+# Secrets and local config: never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.dev.vars
+# Real business data must never enter this repository
+private-data/
+real-data/
+*.local.csv
+*.local.xlsx
+exports/

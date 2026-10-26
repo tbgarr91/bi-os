@@ -1,0 +1,9 @@
+{
+  "id": "FIXTURE-D",
+  "synthetic": true,
+  "status": "CANDIDATE_UNAPPROVED",
+  "source": "BI OS Project file 16, Fixture D",
+  "currency": "USD",
+  "components": { "payments": ["40.00", "60.00", "100.00"], "total_fees": "6.00" },
+  "expected": { "payout": "194.00", "note": "Many-to-one allocation: one payout settles several payments." }
+}
