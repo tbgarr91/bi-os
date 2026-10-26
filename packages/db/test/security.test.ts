@@ -226,12 +226,14 @@ describe("SEC-13 automated privilege inspection (release gate)", () => {
     expect(rows.map((r) => r.relname)).toEqual([]);
   });
   it("anon has no table privileges at all", async () => {
-    const rows = (await admin((c) => c.query("select table_name, privilege_type from information_schema.role_table_grants where grantee='anon' and table_schema='public'"))).rows;
+    const rows = (await admin((c) => c.query("select table_name, privilege_type from information_schema.role_table_grants where grantee='anon' and table_schema='public' union select table_name, privilege_type from information_schema.column_privileges where grantee='anon' and table_schema='public'"))).rows;
     expect(rows).toEqual([]);
   });
   it("authenticated never has DELETE, TRUNCATE, or write access to memberships, grants or audit", async () => {
+    // table-level AND column-level grants (column grants are listed separately in column_privileges)
     const rows = (await admin((c) => c.query(
-      "select table_name, privilege_type from information_schema.role_table_grants where grantee='authenticated' and table_schema='public'"))).rows;
+      `select table_name, privilege_type from information_schema.role_table_grants where grantee='authenticated' and table_schema='public'
+       union select table_name, privilege_type from information_schema.column_privileges where grantee='authenticated' and table_schema='public'`))).rows;
     expect(rows.filter((r) => ["DELETE", "TRUNCATE", "REFERENCES", "TRIGGER"].includes(r.privilege_type))).toEqual([]);
     const writes = rows.filter((r) => ["INSERT", "UPDATE"].includes(r.privilege_type)).map((r) => r.table_name);
     for (const t of ["workspace_memberships", "access_grants", "audit_events", "role_permissions", "role_definitions", "permission_definitions"]) {
