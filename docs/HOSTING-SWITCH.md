@@ -20,3 +20,10 @@ Decision (founder, 2026-10-25): host on Cloudflare; keep a clean path to Vercel.
 3. Select the `vercel` adapter via `BIOS_HOST=vercel`.
 4. Point DNS, verify, then retire the Cloudflare deployment.
 (Details to be confirmed in M0 once the web app exists.)
+
+## M0 results (2026-10-25, verified locally)
+- `next build` (Vercel path) succeeds for `apps/web`.
+- OpenNext for Cloudflare build (`pnpm --filter @bi-os/web build:cloudflare`) succeeds and produces `.open-next/worker.js`.
+- In the local Workers runtime (workerd, via `pnpm --filter @bi-os/runtime-compat compat`), these parsers ran correctly on synthetic data: `papaparse` (CSV), `read-excel-file` (XLSX, web-worker build), `exceljs` (XLSX).
+- **Not yet verified:** behaviour on large files (memory and CPU limits), and on the deployed Cloudflare edge rather than locally. Heavy imports therefore stay behind the job interface; a Node import worker remains the fallback.
+- The wrangler dev server logs a harmless blocked call to workers.cloudflare.com in this sandbox.

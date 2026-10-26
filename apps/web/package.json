@@ -1,0 +1,27 @@
+{
+  "name": "@bi-os/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "echo 'no web tests in M0'",
+    "build:vercel": "next build",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@bi-os/core": "workspace:*",
+    "@bi-os/host": "workspace:*",
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "latest",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

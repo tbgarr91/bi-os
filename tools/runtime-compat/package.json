@@ -1,0 +1,10 @@
+{
+  "name": "@bi-os/runtime-compat",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "M0 experiment: do candidate CSV/XLSX parsers run inside the Cloudflare Workers runtime (workerd)? Synthetic data only.",
+  "scripts": { "typecheck": "echo skip", "compat": "bash run.sh", "test": "echo skipped-in-ci" },
+  "dependencies": { "papaparse": "^5.4.1", "exceljs": "^4.4.0", "read-excel-file": "^5.8.0" },
+  "devDependencies": { "wrangler": "^4.0.0" }
+}
