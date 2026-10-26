@@ -7,7 +7,7 @@ Business Intelligence OS. Private repository. Planning documents and decisions l
 ## Layout
 - `packages/core` – domain logic, host-independent (money in integer cents, later: metric engine, authorization, connectors).
 - `packages/fixtures` – synthetic golden fixtures (the only data allowed in this repository).
-- `packages/host` – the single interface to hosting (secrets, jobs), with Cloudflare and Vercel adapters. See `docs/HOSTING-SWITCH.md`.
+- `packages/host` – the single interface to hosting (secrets, jobs), with Vercel (primary) and Cloudflare (secondary) adapters. See `docs/HOSTING-SWITCH.md`.
 - `apps/web` – the web application (Next.js).
 
 ## Commands

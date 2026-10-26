@@ -1,6 +1,6 @@
-# Hosting: Cloudflare now, Vercel kept open
+# Hosting: Vercel primary, Cloudflare secondary
 
-Decision (founder, 2026-10-25): host on Cloudflare; keep a clean path to Vercel.
+Decision (founder, 2026-10-25, revised): **Vercel is the primary host; Cloudflare is the secondary.** An earlier same-day decision chose Cloudflare first; it was reversed after the founder found his earlier limit concern was Supabase, not Vercel. Both adapters stay built, tested and in CI so either can be the deployment. Nothing is deployed yet.
 
 ## Rules that keep the switch cheap
 1. Business logic lives in `packages/core` with no host-specific imports.
@@ -14,12 +14,14 @@ Decision (founder, 2026-10-25): host on Cloudflare; keep a clean path to Vercel.
 - `pnpm --filter @bi-os/web build:cloudflare` (OpenNext for Cloudflare) succeeds.
 - `pnpm --filter @bi-os/host test` passes for both adapters.
 
-## Steps to switch the live deployment from Cloudflare to Vercel
-1. Create the Vercel project from this repository, root `apps/web`.
-2. Copy environment variable names from the host secret store (values via the provider's secret UI, never via chat).
-3. Select the `vercel` adapter via `BIOS_HOST=vercel`.
-4. Point DNS, verify, then retire the Cloudflare deployment.
-(Details to be confirmed in M0 once the web app exists.)
+## Steps to switch the live deployment between hosts (either direction)
+1. Create the project on the other host from this repository, root `apps/web` (Vercel: framework Next.js; Cloudflare: `build:cloudflare`).
+2. Copy environment variable names (not values) from one host's secret store; enter values through the provider's secret UI, never via chat.
+3. Select the adapter with `BIOS_HOST=vercel` or `BIOS_HOST=cloudflare`.
+4. Point DNS, verify, then retire the old deployment.
+
+## Vercel-specific note
+Serverless functions have time limits (the founder's TBG.OS hit a 300-second ceiling). Long imports and backfills must run as chunked, resumable jobs behind the job interface (a queue or workflow service chosen in M2), never as one long request.
 
 ## M0 results (2026-10-25, verified locally)
 - `next build` (Vercel path) succeeds for `apps/web`.

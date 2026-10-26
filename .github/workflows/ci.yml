@@ -17,6 +17,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+      - run: pnpm --filter @bi-os/web build:vercel
+      - run: pnpm --filter @bi-os/web build:cloudflare
   secret-scan:
     runs-on: ubuntu-latest
     steps:
