@@ -62,3 +62,23 @@ describe("golden arithmetic (fixtures agree with their own components; this is n
     expect(format(sub(gross, usd(f.components.total_fees)))).toBe(format(usd(f.expected.payout)));
   });
 });
+
+describe("metric engine agrees with the founder example fixture", () => {
+  it("CONTRIB.ORDER reproduces the fixture's expected values from its components", async () => {
+    const { orderContribution } = await import("@bi-os/core");
+    const f = fixtures[0];
+    const c = f.components;
+    const a = (s: string) => ({ amount: usd(s), basis: "actual" as const });
+    const r = orderContribution({
+      currency: "USD", orderRef: f.id,
+      netProductRevenue: a(c.product_price),
+      netShippingRevenue: a(c.customer_shipping_charged),
+      productCost: a(c.supplier_production), supplierShipping: a(c.supplier_shipping), supplierTax: "n/a",
+      paymentFees: a(c.processor_fee), channelFees: "n/a", packaging: "n/a", reprintCosts: "n/a", otherVariable: a(c.extra_variable_costs),
+    });
+    expect(format(r.value!.revenue)).toBe(`${f.expected.eligible_order_revenue} USD`);
+    expect(format(r.value!.variableCosts)).toBe(`${f.expected.variable_costs} USD`);
+    expect(format(r.value!.contribution)).toBe(`${f.expected.order_contribution} USD`);
+    expect(r.value!.marginBps).toBe(f.expected.contribution_margin_bps);
+  });
+});
